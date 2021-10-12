@@ -1,2 +1,9 @@
 *.bin
 *.vcd
+*.str
+*.jou
+*.log
+*.cache
+*.hw
+*.runs
+*.bit

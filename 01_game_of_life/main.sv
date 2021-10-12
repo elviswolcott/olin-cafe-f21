@@ -28,7 +28,7 @@ module main(clk, buttons, leds, rgb, cols, rows);
   //Module I/O and parameters
   parameter game_divider = 23; // A clock divider parameter - 12 MHz / 2^23 is about 1 Hz (human visible speed).
   parameter display_divider = 12; // 12 to 17 are good values. Need to PWM the LEDs faster than the game clock.
-  parameter N = 8; // Size of the grid
+  parameter N = 5; // Size of the grid
   parameter M = N + 2; // Size of the grid, plus a border all around (makes wiring way easier).
   // Parameter checks.
   initial if (N < 3) $error("N has to be >= 3 to make for interesting patterns.");
@@ -82,7 +82,7 @@ module main(clk, buttons, leds, rgb, cols, rows);
   );
 
   // Initialize the grid. 
-`define MANUAL_INITIAL_CONDITION // Uncomment to use the second clause for different initial conditions!
+//`define MANUAL_INITIAL_CONDITION // Uncomment to use the second clause for different initial conditions!
   always_comb begin 
 `ifndef MANUAL_INITIAL_CONDITION
     // This sets up the "blinker" oscillator in the center of a grid.
