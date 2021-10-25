@@ -15,7 +15,7 @@ logic counter_comparator;
 
 always_ff @(posedge clk) begin
   if (rst |  counter_comparator) begin
-    counter <= 1'b0;
+    counter <= 0;
   end else if (ena) begin
     counter <= counter + 1'b1;
   end
@@ -23,7 +23,7 @@ end
 
 always_comb begin
   counter_comparator = counter == ticks - 1;
-  out = counter_comparator & ena & clk;
+  out = counter_comparator & ena;
 end
 
 endmodule

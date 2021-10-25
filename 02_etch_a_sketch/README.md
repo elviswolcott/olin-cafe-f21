@@ -14,8 +14,8 @@ We're using [Adafruit's 2.8" TFT LCD with Cap Touch Breakout Board w/MicroSD Soc
 
 ## Lab Checklist
 
-- [ ] Pulse generator
-- [ ] PWM Module
+- [x] Pulse generator
+- [x] PWM Module
 - [ ] General purpose parallel to serial module
 - [ ] General purpose serial to parallel module
 - [ ] SPI Controller for Display

@@ -22,6 +22,21 @@ logic [N-1:0] counter;
 // bonus: out should be fully zero at duty = 0, and fully 1 (always on) at duty = 2^N-1;
 // You can use behavioural combinational logic, but try to keep your sequential
 //   and combinational blocks as separate as possible.
+always_ff @( posedge clk) begin : pwmCounter
+  if (rst) begin
+    counter <= 0;
+  end else if (ena & step) begin
+    counter <= counter + 1; // we can rely on the overflow behavior to wrap around to 0
+  end
+end
+
+always_comb begin : outputLogic
+  if (ena) begin
+    out = (counter < duty) | (duty == (2**N)-1);
+  end else begin
+    out = 0;
+  end
+end
 
 
 endmodule
