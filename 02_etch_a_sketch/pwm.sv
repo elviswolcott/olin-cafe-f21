@@ -25,7 +25,7 @@ logic [N-1:0] counter;
 always_ff @( posedge clk) begin : pwmCounter
   if (rst) begin
     counter <= 0;
-  end else if (ena & step) begin
+  end else if (step) begin
     counter <= counter + 1; // we can rely on the overflow behavior to wrap around to 0
   end
 end
