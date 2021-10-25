@@ -12,6 +12,7 @@ logic incriment;
 always_ff @( posedge clk ) begin : counter
   if (rst) begin
     active_for <= 0;
+    state <= STATE_0;
   end else if(incriment) begin
     active_for <= active_for + 1;
   end
@@ -24,9 +25,6 @@ always_comb begin : reset
 end
 
 always_comb begin : stateTransition
-  if (rst) begin
-    state = STATE_0;
-  end
   if (state == MAYBE_0) begin
     incriment = bouncy_in == 0;
   end else if (state == MAYBE_1) begin
