@@ -5,7 +5,7 @@ VVP=vvp
 VIVADO=vivado -mode batch -source
 
 # Add any new source files needed for the final bitstream here
-SRCS=pulse_generator.sv pwm.sv triangle_generator.sv 
+SRCS=pulse_generator.sv pwm.sv triangle_generator.sv led_example.sv debouncer.sv edge_detector.sv
 
 # Look up .PHONY rules for Makefiles
 .PHONY: clean submission remove_solutions
@@ -23,6 +23,14 @@ test_triangle_generator: tests/test_triangle_generator.sv triangle_generator.sv
 test_debouncer : tests/test_debouncer.sv debouncer.sv
 	${IVERILOG} $^ -o test_debouncer.bin && ${VVP} test_debouncer.bin
 
+test_edge_detectors: tests/test_edge_detectors.sv edge_detector.sv
+	${IVERILOG} $^ -o test_edge_detectors.bin && ${VVP} test_edge_detectors.bin
+
+test_example: tests/test_example.sv led_example.sv edge_detector.sv debouncer.sv
+	${IVERILOG} $^ -o test_example.bin && ${VVP} test_example.bin
+
+test_example_main: tests/test_example_main.sv example.sv led_example.sv edge_detector.sv debouncer.sv
+	${IVERILOG} $^ -o test_example_main.bin && ${VVP} test_example_main.bin
 
 test_main: tests/test_main.sv main.sv $(SRCS)
 	@echo "This might take a while, we're testing a lot of clock cycles!"
@@ -43,6 +51,18 @@ program_fpga_vivado: main.bit
 	@echo "#### Programming FPGA (Vivado)      ####"
 	@echo "########################################"
 	${VIVADO} program.tcl
+
+example.bit: example.sv $(SRCS)
+	@echo "########################################"
+	@echo "#### Building FPGA bitstream        ####"
+	@echo "########################################"
+	${VIVADO} build_example.tcl
+
+program_fpga_vivado_example: example.bit
+	@echo "########################################"
+	@echo "#### Programming FPGA (Vivado)      ####"
+	@echo "########################################"
+	${VIVADO} program_example.tcl
 
 program_fpga_digilent: main.bit
 	@echo "########################################"

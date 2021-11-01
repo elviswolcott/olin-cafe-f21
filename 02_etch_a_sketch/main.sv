@@ -37,6 +37,8 @@ output wire backlight, display_rstb, data_commandb;
 output wire display_csb, spi_clk, spi_mosi;
 input wire spi_miso;
 
+led_example LED_STATE_MACHINE(clk, buttons[0], buttons[1], rgb[2], rgb[1], rgb[0]);
+
 
 // Some useful timing signals.
 wire step_1Hz;
