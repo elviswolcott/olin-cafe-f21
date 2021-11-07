@@ -18,6 +18,9 @@ SRCS=mux4.sv mux8.sv mux16.sv mux32.sv \
 test_alu: test_alu.sv alu.sv alu_types.sv alu_behavioural.sv ${SRCS}
 	${IVERILOG} $^ -o test_alu.bin && ${VVP} test_alu.bin ${VVP_POST}
 
+test_sltu: test_sltu.sv sltu.sv ${SRCS}
+	${IVERILOG} $^ -o test_sltu.bin && ${VVP} test_sltu.bin ${VVP_POST}
+
 waves_alu: test_alu
 		gtkwave alu.fst &
 
