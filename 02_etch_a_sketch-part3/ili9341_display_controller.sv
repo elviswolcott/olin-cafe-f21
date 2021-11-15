@@ -131,14 +131,14 @@ end
 always_comb begin  : test_pattern
   // Draw a white border around every 16x16 area
   if ((pixel_x[4:0] == 5'd16) | (pixel_y[4:0] == 5'd16)) begin
-    pixel_color = WHITE;
+    pixel_color = RED;
   end
   else begin
     case({pixel_x[4], pixel_y[4]})
       2'b00: pixel_color = RED;
-      2'b01: pixel_color = GREEN;
-      2'b10: pixel_color = BLUE;
-      2'b11: pixel_color = BLACK;
+      2'b01: pixel_color = RED;
+      2'b10: pixel_color = RED;
+      2'b11: pixel_color = RED;
     endcase
   end
 end
